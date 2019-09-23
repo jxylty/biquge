@@ -1,31 +1,36 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+    <div class="head">笔趣阁</div>
+	<!-- <div class="nav">分类</div> -->
+   <div class="nav">
+		<ul>
+			<li v-for="nav of navs">  {{nav}}</li>
+		</ul>
+	</div>
+      
+    
     <router-view/>
   </div>
 </template>
 
+<script>
+	export default{
+		name: 'app',
+		data(){
+			return {
+				navs: ['分类','排行', '全本', '新书','书架']
+			}
+		}
+	}
+</script>
+
+
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
+	#app{
+		font-size: 0.4rem;
+		/* font-size: 20px; */
+	}
+	.nav{
+		font-size: 0.32rem;
+	}
 </style>
