@@ -7,7 +7,7 @@
 			<div class="login-left" @click='login'>
 				登录
 			</div>
-			<div class="login-right">
+			<div class="login-right" @click='regsiter'>
 				注册
 			</div>
 		</div>
@@ -89,11 +89,14 @@
 			        this.dian=[];
 			        this.fan=0;
 			    }
+				
 			},
 			login(){
 				this.$router.push('login')
 
-            }
+            },regsiter(){
+				this.$router.push('/regsiter')
+			}
 			
 		}
 	}

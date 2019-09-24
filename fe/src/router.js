@@ -7,6 +7,7 @@ import Wapfull from './views/Wapfull.vue'
 import Postdate from './views/Postdate.vue'
 import Bookcase from './views/Bookcase.vue'
 import Login from './views/Login.vue'
+import Regsiter from './views/Regsiter.vue'
 
 Vue.use(Router)
 
@@ -42,7 +43,12 @@ const router = new Router({
 		path: '/login',
 		name:'login',
 		component: Login
+	},{
+		path: '/regsiter',
+		name:'regsiter',
+		component: Regsiter
 	}
+	
 	
 
   ]

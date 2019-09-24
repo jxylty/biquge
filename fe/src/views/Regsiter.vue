@@ -1,12 +1,12 @@
 <template>
 	<div>
-		登录22222
+		注册
 	</div>
 </template>
 
 <script>
 	export default{
-		name: 'login'
+		name: 'regsiter'
 	}
 </script>
 
