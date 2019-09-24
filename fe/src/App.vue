@@ -13,7 +13,8 @@
 		</div>
 	</div>
 	<div class="head2" v-show="!falg">
-		<div >返回</div>
+
+		<div class="back" @click="goback()">返回</div>
 		<div class="qf">{{ qvs }}</div>
 		<div class="toHome">首页</div>
 	</div>
@@ -23,7 +24,6 @@
 				<li v-for="nav of navs" @click="goRouter(nav.name,nav.ntext)">  {{nav.text}}</li>
 			</ul>
 	</div>
-
       
     
     <router-view/>
@@ -40,11 +40,11 @@
 				qvs:'',
 				dian:[],
 				fan:0,
+				falg: true,
 				navs: [{
 					name: 'sort',
 					text:'分类',
 					ntext:'分类列表'
-					
 				},
 				{
 					name: 'top',
@@ -76,12 +76,10 @@
 		},
 		methods:{
 			goRouter(name,ntext){
-				
-				this.$router.push(name);
-				this.qvs = ntext;
-				this.falg=false;
-				this.dian.push(ntext);
-				
+			    this.$router.push(name);
+			    this.qvs = ntext;
+			    this.falg=false;
+			    this.dian.push(ntext);
 			},
 			goback(){
 			    this.$router.back();
@@ -94,7 +92,9 @@
 			},
 			login(){
 				this.$router.push('login')
-			}
+
+            }
+			
 		}
 	}
 
@@ -114,14 +114,40 @@
 	}
 	.head2{
 		/* display: none; */
-		line-height: 1rem;
-		height:1rem;background:rgba(0,125,178);
+		line-height:.5rem;
+		height:1rem;
+        background:rgba(0,125,178);
 	}
 	.head2 > div{
 		float: left;
 	}
-	.head2 .back{font-size: 0.28rem;}
-	.head2 .toHome{font-size: 0.28rem;}
+	.head2 .back{
+        margin-top:.2rem;
+        margin-left:.2rem;
+        font-size: 0.28rem;
+        color:white;
+        text-align: center;
+        border-radius:0.06rem;
+        padding:.05rem .25rem .05rem .25rem;
+        background:rgba(43,189,237);
+        }
+    .head2 .qf{
+        font-size: 0.32rem;
+        color:white;
+        line-height:1rem;
+        margin:0 1.85rem;
+    }
+	.head2 .toHome{
+        margin-top:.2rem;
+        margin-right:.2rem;
+        font-size: 0.28rem;
+        color:white;
+        text-align: center;
+        border-radius:0.06rem;
+        padding-top:0.05rem;
+        padding:.05rem .25rem .05rem .25rem;
+        background:rgba(43,189,237);
+        }
    .logo{
         float: left;
         font-size: 0.4rem;
@@ -135,15 +161,20 @@
         margin-right:.2rem
     }
     .login-left{
+        float: left;
+        padding: .1rem;
 		margin-top: .18rem;
-        float: left;border-radius:0.06rem ;
-        font-size: 0.32rem;padding: .1rem;
+        border-radius:0.06rem ;
+        font-size: 0.32rem;
         background:rgba(43,189,237);
         color:white;
     }
     .login-right{
-        float: left;margin-left: .1rem;padding: .1rem;
-        font-size: 0.32rem;margin-top: .18rem;
+        float: left;
+        padding: .1rem;
+        margin-left: .2rem;
+        margin-top: .18rem;
+        font-size: 0.32rem;
         background:rgba(43,189,237);border-radius:0.06rem ;
         color:white;
     }
