@@ -6,7 +6,10 @@
 
 <script>
 	export default{
-		name:'postdate'
+        name:'postdate',
+        components: {
+    
+     }
 	}
 </script>
 
