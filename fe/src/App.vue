@@ -1,10 +1,17 @@
 <template>
   <div id="app">
-    <div class="head">笔趣阁</div>
-	<!-- <div class="nav">分类</div> -->
+    <div class="logo">新笔趣阁</div>
+	<div class="login">
+        <div class="login-left">
+            登录
+        </div>
+        <div class="login-right">
+            注册
+        </div>
+    </div>
    <div class="nav">
 		<ul>
-			<li v-for="nav of navs">  {{nav}}</li>
+			<!-- <li v-for="nav of navs">{{nav}}</li> -->
 		</ul>
 	</div>
       
@@ -27,9 +34,34 @@
 
 <style>
 	#app{
-		font-size: 0.4rem;
+		
 		/* font-size: 20px; */
+        height:1rem;
+        background:rgba(0,125,178);
 	}
+   .logo{
+        float: left;
+        font-size: 0.4rem;
+        color:white;
+        line-height:1rem;
+        margin-left:.2rem;
+    }
+    .login{
+        float:right;
+        margin-right:.2rem
+    }
+    .login-left{
+        float: left;
+        font-size: 0.4rem;
+        background:rgba(43,189,237);
+        color:white;
+    }
+    .login-right{
+        float: left;
+        font-size: 0.4rem;
+        background:rgba(43,189,237);
+        color:white;
+    }
 	.nav{
 		font-size: 0.32rem;
 	}
