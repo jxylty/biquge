@@ -13,7 +13,7 @@
 		</div>
 	</div>
 	<div class="head2" v-show="!falg">
-		<div class="back" >返回</div>
+		<div >返回</div>
 		<div class="qf">{{ qvs }}</div>
 		<div class="toHome">首页</div>
 	</div>
@@ -38,6 +38,8 @@
 				nav: true,
 				falg: true,
 				qvs:'',
+				dian:[],
+				fan:0,
 				navs: [{
 					name: 'sort',
 					text:'分类',
@@ -51,11 +53,13 @@
 				},
 				{
 					name: 'wapfull',
-					text:'全本'
+					text:'全本',
+					ntext:'完本小说'
 				},
 				{
 					name: 'postdate',
-					text: '新书'
+					text: '新书',
+					ntext:'最新入库'
 				},
 				{
 					name:'bookcase',
@@ -73,10 +77,20 @@
 		methods:{
 			goRouter(name,ntext){
 				
-				this.$router.push(name)
-				this.qvs = ntext
-				this.falg=false
+				this.$router.push(name);
+				this.qvs = ntext;
+				this.falg=false;
+				this.dian.push(ntext);
 				
+			},
+			goback(){
+			    this.$router.back();
+			    this.fan++;
+			    if (this.fan==this.dian.length) {
+			        this.falg=true;
+			        this.dian=[];
+			        this.fan=0;
+			    }
 			},
 			login(){
 				this.$router.push('login')

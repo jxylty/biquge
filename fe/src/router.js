@@ -48,7 +48,6 @@ const router = new Router({
   ]
 })
 
-// Vue.prototype.$eventBus = new Vue();
 
 router.beforeEach( (to, from, next)=>{
 	const navName = ['bookcase','login'];
