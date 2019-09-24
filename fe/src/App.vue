@@ -4,7 +4,7 @@
 	<div class="head" v-show="falg">
 		<div class="logo">新笔趣阁</div>
 		<div class="login">
-			<div class="login-left">
+			<div class="login-left" @click='login'>
 				登录
 			</div>
 			<div class="login-right">
@@ -13,12 +13,12 @@
 		</div>
 	</div>
 	<div class="head2" v-show="!falg">
-		<div class="back">返回</div>
+		<div class="back" >返回</div>
 		<div class="qf">{{ qvs }}</div>
 		<div class="toHome">首页</div>
 	</div>
 	
-	<div class="nav">
+	<div class="nav" v-if="nav">
 			<ul>
 				<li v-for="nav of navs" @click="goRouter(nav.name,nav.ntext)">  {{nav.text}}</li>
 			</ul>
@@ -35,6 +35,7 @@
 		name: 'app',
 		data(){
 			return {
+				nav: true,
 				falg: true,
 				qvs:'',
 				navs: [{
@@ -55,18 +56,34 @@
 				{
 					name: 'postdate',
 					text: '新书'
+				},
+				{
+					name:'bookcase',
+					text: '书架',
+					ntext:'我的书架'
 				}
 				]
 			}
 		},
+		mounted(){
+			this.$eventBus.$on("navShow",(data)=>{
+				this.nav = data
+			})
+		},
 		methods:{
 			goRouter(name,ntext){
+				
 				this.$router.push(name)
 				this.qvs = ntext
 				this.falg=false
+				
+			},
+			login(){
+				this.$router.push('login')
 			}
 		}
 	}
+
 </script>
 
 

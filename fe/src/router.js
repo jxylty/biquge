@@ -5,10 +5,12 @@ import Sort from './views/Sort.vue'
 import Top from './views/Top.vue'
 import Wapfull from './views/Wapfull.vue'
 import Postdate from './views/Postdate.vue'
+import Bookcase from './views/Bookcase.vue'
+import Login from './views/Login.vue'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
@@ -32,8 +34,36 @@ export default new Router({
 		path: '/postdate',
 		name: 'postdate',
 		component: Postdate
+	},{
+		path: '/bookcase',
+		name:'bookcase',
+		component: Bookcase
+	},{
+		path: '/login',
+		name:'login',
+		component: Login
 	}
 	
 
   ]
 })
+
+// Vue.prototype.$eventBus = new Vue();
+
+router.beforeEach( (to, from, next)=>{
+	const navName = ['bookcase','login'];
+	const $eventBus = Vue.prototype.$eventBus;
+	if(navName.indexOf(to.name) !== -1){
+		$eventBus.$emit('navShow',false)
+	}else{
+		$eventBus.$emit('navShow',true)
+	}
+	next(true);
+	// console.log(to.name)
+	// console.log($eventBus)
+	
+})
+
+
+
+export default router;
