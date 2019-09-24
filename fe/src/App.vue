@@ -1,16 +1,28 @@
 <template>
-  <div id="app">
-    <div class="head">笔趣阁</div>
+<div id="app">
 	
-   <div class="nav">
-		<ul>
-			<li v-for="nav of navs" @click="goRouter(nav.name)">  {{nav.text}}</li>
-		</ul>
+	<div class="head">
+		<div class="logo">新笔趣阁</div>
+		<div class="login">
+			<div class="login-left">
+				登录
+			</div>
+			<div class="login-right">
+				注册
+			</div>
+		</div>
 	</div>
+	
+	<div class="nav">
+			<ul>
+				<li v-for="nav of navs" @click="goRouter(nav.name)">  {{nav.text}}</li>
+			</ul>
+	</div>
+
       
     
     <router-view/>
-  </div>
+</div>
 </template>
 
 <script>
@@ -48,9 +60,38 @@
 
 <style>
 	#app{
-		font-size: 0.4rem;
+		
 		/* font-size: 20px; */
+        width: 100%;height: 100%;
+        
 	}
+	.head{
+		height:1rem;background:rgba(0,125,178);
+	}
+   .logo{
+        float: left;
+        font-size: 0.4rem;
+        color:white;
+        line-height:1rem;
+        margin-left:.2rem;
+		height: 1rem;
+    }
+    .login{
+        float:right;height: 1rem;
+        margin-right:.2rem
+    }
+    .login-left{
+        float: left;
+        font-size: 0.4rem;
+        background:rgba(43,189,237);
+        color:white;
+    }
+    .login-right{
+        float: left;
+        font-size: 0.4rem;
+        background:rgba(43,189,237);
+        color:white;
+    }
 	.nav{
 		font-size: 0.32rem;height: 0.7rem;
 		background: rgb(236,240,240);line-height: 0.7rem;
