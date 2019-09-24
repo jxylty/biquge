@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    
+    封面推荐
   </div>
 </template>
 

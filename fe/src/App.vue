@@ -1,7 +1,7 @@
 <template>
 <div id="app">
 	
-	<div class="head">
+	<div class="head" v-show="falg">
 		<div class="logo">新笔趣阁</div>
 		<div class="login">
 			<div class="login-left">
@@ -12,10 +12,15 @@
 			</div>
 		</div>
 	</div>
+	<div class="head2" v-show="!falg">
+		<div class="back">返回</div>
+		<div class="qf">{{ qvs }}</div>
+		<div class="toHome">首页</div>
+	</div>
 	
 	<div class="nav">
 			<ul>
-				<li v-for="nav of navs" @click="goRouter(nav.name)">  {{nav.text}}</li>
+				<li v-for="nav of navs" @click="goRouter(nav.name,nav.ntext)">  {{nav.text}}</li>
 			</ul>
 	</div>
 
@@ -30,13 +35,18 @@
 		name: 'app',
 		data(){
 			return {
+				falg: true,
+				qvs:'',
 				navs: [{
 					name: 'sort',
-					text:'分类'
+					text:'分类',
+					ntext:'分类列表'
+					
 				},
 				{
 					name: 'top',
-					text:'排行'
+					text:'排行',
+					ntext:'排行分类'
 				},
 				{
 					name: 'wapfull',
@@ -50,8 +60,10 @@
 			}
 		},
 		methods:{
-			goRouter(name){
+			goRouter(name,ntext){
 				this.$router.push(name)
+				this.qvs = ntext
+				this.falg=false
 			}
 		}
 	}
@@ -66,8 +78,19 @@
         
 	}
 	.head{
+		
 		height:1rem;background:rgba(0,125,178);
 	}
+	.head2{
+		/* display: none; */
+		line-height: 1rem;
+		height:1rem;background:rgba(0,125,178);
+	}
+	.head2 > div{
+		float: left;
+	}
+	.head2 .back{font-size: 0.28rem;}
+	.head2 .toHome{font-size: 0.28rem;}
    .logo{
         float: left;
         font-size: 0.4rem;
@@ -81,18 +104,20 @@
         margin-right:.2rem
     }
     .login-left{
-        float: left;
-        font-size: 0.4rem;
+		margin-top: .18rem;
+        float: left;border-radius:0.06rem ;
+        font-size: 0.32rem;padding: .1rem;
         background:rgba(43,189,237);
         color:white;
     }
     .login-right{
-        float: left;
-        font-size: 0.4rem;
-        background:rgba(43,189,237);
+        float: left;margin-left: .1rem;padding: .1rem;
+        font-size: 0.32rem;margin-top: .18rem;
+        background:rgba(43,189,237);border-radius:0.06rem ;
         color:white;
     }
 	.nav{
+		
 		font-size: 0.32rem;height: 0.7rem;
 		background: rgb(236,240,240);line-height: 0.7rem;
 	}
