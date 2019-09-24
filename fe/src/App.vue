@@ -13,7 +13,7 @@
 		</div>
 	</div>
 	<div class="head2" v-show="!falg">
-		<div class="back">返回</div>
+		<div class="back" @click="goback()">返回</div>
 		<div class="qf">{{ qvs }}</div>
 		<div class="toHome">首页</div>
 	</div>
@@ -36,7 +36,9 @@
 			return {
                 welcome: 'welcome to here',
 				falg: true,
-				qvs:'gfdsgds',
+                qvs:'gfdsgds',
+                dian:[],
+                fan:0,
 				navs: [{
 					name: 'sort',
 					text:'分类',
@@ -67,9 +69,19 @@
 		},
 		methods:{
 			goRouter(name,ntext){
-                this.$router.push(name)
-                this.qvs = ntext
-				this.falg=false
+                this.$router.push(name);
+                this.qvs = ntext;
+                this.falg=false;
+                this.dian.push(ntext);
+            },
+            goback(){
+                this.$router.back();
+                this.fan++;
+                if (this.fan==this.dian.length) {
+                    this.falg=true;
+                    this.dian=[];
+                    this.fan=0;
+                }
 			}
 		}
 	}
