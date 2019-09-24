@@ -1,6 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
+import Sort from './views/Sort.vue'
+import Top from './views/Top.vue'
+import Wapfull from './views/Wapfull.vue'
+import Postdate from './views/Postdate.vue'
 
 Vue.use(Router)
 
@@ -12,15 +16,24 @@ export default new Router({
       path: '/',
       name: 'home',
       component: Home
-    }
-	// ,
- //    {
- //      path: '/about',
- //      name: 'about',
- //      // route level code-splitting
- //      // this generates a separate chunk (about.[hash].js) for this route
- //      // which is lazy-loaded when the route is visited.
- //      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
- //    }
+    },{
+		path: '/sort',
+		name: 'sort',
+		component: Sort
+	},{
+		path: '/top',
+		name: 'top',
+		component: Top
+	},{
+		path: '/wapfull',
+		name: 'wapfull',
+		component: Wapfull
+	},{
+		path: '/postdate',
+		name: 'postdate',
+		component: Postdate
+	}
+	
+
   ]
 })
