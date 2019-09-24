@@ -24,7 +24,11 @@
 				<li v-for="nav of navs" @click="goRouter(nav.name,nav.ntext)">  {{nav.text}}</li>
 			</ul>
 	</div>
-      
+     <div class="search">
+        <input class="search-in" type="text">
+        <input type="button" class="search-on">
+        <img class="search-img" src="./img/search.png" alt="">
+    </div> 
     
     <router-view/>
 </div>
@@ -82,8 +86,9 @@
 			    this.dian.push(ntext);
 			},
 			goback(){
-			    this.$router.back();
-			    this.fan++;
+                this.$router.back();
+                this.dian.pop();
+                this.qvs = this.dian[this.dian.length-1];
 			    if (this.fan==this.dian.length) {
 			        this.falg=true;
 			        this.dian=[];
@@ -92,7 +97,9 @@
 			},
 			login(){
 				this.$router.push('login')
-
+                this.falg=false;
+                this.qvs="用户登录"
+                this.dian.push("x");
             }
 			
 		}
@@ -180,8 +187,11 @@
     }
 	.nav{
 		
-		font-size: 0.32rem;height: 0.7rem;
-		background: rgb(236,240,240);line-height: 0.7rem;
+		font-size: 0.32rem;
+        height: 0.7rem;
+		background: rgb(236,240,240);
+        line-height: 0.7rem;
+        margin-bottom:.2rem;
 	}
 	.nav ul li{
 		list-style: none; float: left;
@@ -193,4 +203,33 @@
 		    float: left;
 		    text-align: center;
 	}
+    .search {
+            width: 7.30rem;
+            height: .72rem;
+            border: 1px solid #999;
+            margin-left: .08rem;
+        }
+        
+    .search-in {
+            display: block;
+            float: left;
+            width: 5.92rem;
+            height: .54rem;
+            margin-top: .08rem;
+            border: none;
+        }
+        
+    .search-on {
+            display: block;
+            float: right;
+            width: .72rem;
+            height: .72rem;
+            background:#0080C0;
+        }
+    .search-img{
+        position: absolute;
+        width:.5rem;
+        right:.1rem;
+        top:.1rem;
+    }
 </style>
