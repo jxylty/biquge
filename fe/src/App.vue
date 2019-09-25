@@ -27,7 +27,7 @@
      <div class="search" v-if="nav">
         <input v-model="friuts" @blur="noxiaoShi" @focus="xiaoShi" class="search-in" type="text" value="输入书名后搜索，宁可少字不要错字">
         <input type="button" class="search-on">
-        <img class="search-img" src="./img/search.png" alt="">
+        <img class="search-img" src="../public/img/search.png" alt="">
     </div> 
     
     <router-view/>
@@ -128,7 +128,7 @@
 </script>
 
 
-<style>
+<style scoped>
 	#app{
 		
 		/* font-size: 20px; */
@@ -253,4 +253,5 @@
         right:.1rem;
         top:.1rem;
     }
+
 </style>

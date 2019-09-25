@@ -11,10 +11,10 @@ Vue.prototype.$eventBus = new Vue();
 
 
 new Vue({
-	// data:{
-	// 	$eventBus: new Vue()
-	// },
-  router,
-  store,
-  render: h => h(App)
+    // data:{
+    // 	$eventBus: new Vue()
+    // },
+    router,
+    store,
+    render: h => h(App)
 }).$mount('#app')
