@@ -84,7 +84,7 @@
 			    this.$router.push(name);
 			    this.qvs = ntext;
 			    this.falg=false;
-			    this.dian.push(ntext);
+				this.dian.push('login');    
 			},
 			 gohome(){
 				 this.falg=true;

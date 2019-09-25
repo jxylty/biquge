@@ -1,15 +1,77 @@
 <template>
-	<div>
-		我的书架
+	<div class="books">
+		 <div class="top1">会员中心-我的书架</div>
+		 <div class="content">
+			 <div class="c1"></div>
+			 <div class="f1">
+				 <div class="c1Left"> <img v-bind:src="book1.pic"></div>
+				 <div class="c1C">
+					 <div class="uname">{{ book1.name}}</div>
+					<div class="auth"> 作者 : {{ book1.auth}}</div>
+					<div class="zhuangt"> 更新到 : <span>新书</span></div>
+					<div class="jingdu"> 已读到 : 无书签</div>
+					<div class="del">删除</div>
+				 </div>
+			 </div>
+		 </div>
 	</div>
 </template>
 
 <script>
 	export default{
-		name: 'bookcase'
-		
+		name: 'bookcase',
+		data(){
+			return {
+				book1:{
+					pic: 'http://localhost:3000/2029s.jpg',
+					name: '极品透视',
+					auth: '极品'
+					
+				}
+			}
+		}
 	}
 </script>
 
-<style>
+<style scoped>
+	.books{
+		width: 100%;height: 100%;
+	}
+	.top1{
+		font-size: .32rem;width: 100%;padding: 0.18rem 0;
+		text-align: center;background: rgb(242,242,242);margin-top: .18rem;
+	}
+	.c1{
+		width: 100%;background: rgb(59,168,222);height: .06rem;
+		
+	}
+	.f1{
+		padding: 0.01rem;
+	}
+
+
+	.c1Left{
+		float: left;margin: 0.32rem .16rem;
+	}
+	.c1Left img{
+		width: 1.56rem;height: 1.96rem;
+	}
+	.c1C{
+		font-size: .26rem;color: #a8a8a8;height: 1.96rem;
+		margin-top: .32rem;
+	}
+	.c1C .uname{
+		font-size: .32rem;color: #000;font-weight: 800;
+	}
+	.c1C .auth,.c1C .zhuangt, .c1C .jingdu{
+		margin-top: .15rem;
+	}
+	.zhuangt span{
+		color: red;
+	}
+	.del{
+		position: absolute;font-size: 0.26rem;border: .01rem solid red;
+		color: red;padding: .10rem .2rem;border-radius:.08rem;
+		left:6.1rem;top: 0;
+	}
 </style>
