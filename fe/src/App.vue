@@ -3,7 +3,17 @@
 	
 	<div class="head" v-show="falg">
 		<div class="logo">新笔趣阁</div>
-		<div class="login">
+		
+		<div v-if='isLogin' class="login">
+			<div class="login-left" @click='login2'>
+				会员中心
+			</div>
+			<div class="login-right" @click='regsiter2'>
+				退出
+			</div>
+		</div>
+		
+		<div v-else class="login">
 			<div class="login-left" @click='login'>
 				登录
 			</div>
@@ -11,6 +21,7 @@
 				注册
 			</div>
 		</div>
+		
 	</div>
 	<div class="head2" v-show="!falg">
 
@@ -27,7 +38,7 @@
      <div class="search" v-if="nav">
         <input v-model="friuts" @blur="noxiaoShi" @focus="xiaoShi" class="search-in" type="text" value="输入书名后搜索，宁可少字不要错字">
         <input type="button" class="search-on">
-        <img class="search-img" src="./img/search.png" alt="">
+        <img class="search-img" src="../public/img/search.png" alt="">
     </div> 
     
     <router-view/>
@@ -41,7 +52,11 @@
 			return {
 				friuts: '输入书名后搜索，宁可少字不要错字',
 				nav: true,
+				hy: true,
+				isLogin:existCookie('token'),
+				
 				falg: true,
+				rout: true,
 				qvs:'',
 				dian:[],
 				fan:0,
@@ -74,17 +89,32 @@
 				]
 			}
 		},
+		computed:{
+			
+		},
 		mounted(){
 			this.$eventBus.$on("navShow",(data)=>{
 				this.nav = data
 			})
+			
+			
 		},
 		methods:{
 			goRouter(name,ntext){
-			    this.$router.push(name);
+			    
 			    this.qvs = ntext;
 			    this.falg=false;
-			    this.dian.push(ntext);
+				if(!this.rout){
+					this.$router.push('login');
+					return ;
+				}
+				this.$router.push(name);
+				if(this.dian.indexOf(ntext)!=-1){
+					
+				}else{
+					this.dian.push(ntext);  
+				}
+				  
 			},
 			 gohome(){
 				 this.falg=true;
@@ -118,17 +148,34 @@
 				
 			},noxiaoShi(){
 				this.friuts='输入书名后搜索，宁可少字不要错字';
-			}
+			},regsiter2(){
+				this.$cookieStore.setCookie('token') 
+			},login2(){
+				this.$router.push('bookcase')
+				
+				// this.qvs="用户登录"
+				this.dian.push("x");
+            }
                 
 
 			
 		}
 	}
 
+
+		function existCookie(name) {
+			        let parts = document.cookie.split('; ');
+			        for (let part of parts) {
+			            if (name === part.split('=')[0]) {
+			                return true
+			            }
+			        }
+			        return false;
+			    }
 </script>
 
 
-<style>
+<style scoped>
 	#app{
 		
 		/* font-size: 20px; */
@@ -253,4 +300,5 @@
         right:.1rem;
         top:.1rem;
     }
+
 </style>
