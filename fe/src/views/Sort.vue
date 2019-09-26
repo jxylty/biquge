@@ -46,6 +46,7 @@
 				}else{
 					this.dian2.push('玄幻小说');  
 				}
+				console.log("")
 			},go2(){
 				this.$router.push('x2')
 				this.$store.state.zzz=false;
