@@ -3,7 +3,17 @@
 	
 	<div class="head" v-show="falg">
 		<div class="logo">新笔趣阁</div>
-		<div class="login">
+		
+		<div v-if='isLogin' class="login">
+			<div class="login-left" @click='login2'>
+				会员中心
+			</div>
+			<div class="login-right" @click='regsiter2'>
+				退出
+			</div>
+		</div>
+		
+		<div v-else class="login">
 			<div class="login-left" @click='login'>
 				登录
 			</div>
@@ -11,6 +21,7 @@
 				注册
 			</div>
 		</div>
+		
 	</div>
 	<div class="head2" v-show="!falg">
 
@@ -41,7 +52,11 @@
 			return {
 				friuts: '输入书名后搜索，宁可少字不要错字',
 				nav: true,
+				hy: true,
+				isLogin:existCookie('token'),
+				
 				falg: true,
+				rout: true,
 				qvs:'',
 				dian:[],
 				fan:0,
@@ -74,17 +89,32 @@
 				]
 			}
 		},
+		computed:{
+			
+		},
 		mounted(){
 			this.$eventBus.$on("navShow",(data)=>{
 				this.nav = data
 			})
+			
+			
 		},
 		methods:{
 			goRouter(name,ntext){
-			    this.$router.push(name);
+			    
 			    this.qvs = ntext;
 			    this.falg=false;
-				this.dian.push('login');    
+				if(!this.rout){
+					this.$router.push('login');
+					return ;
+				}
+				this.$router.push(name);
+				if(this.dian.indexOf(ntext)!=-1){
+					
+				}else{
+					this.dian.push(ntext);  
+				}
+				  
 			},
 			 gohome(){
 				 this.falg=true;
@@ -118,13 +148,30 @@
 				
 			},noxiaoShi(){
 				this.friuts='输入书名后搜索，宁可少字不要错字';
-			}
+			},regsiter2(){
+				this.$cookieStore.setCookie('token') 
+			},login2(){
+				this.$router.push('bookcase')
+				
+				// this.qvs="用户登录"
+				this.dian.push("x");
+            }
                 
 
 			
 		}
 	}
 
+
+		function existCookie(name) {
+			        let parts = document.cookie.split('; ');
+			        for (let part of parts) {
+			            if (name === part.split('=')[0]) {
+			                return true
+			            }
+			        }
+			        return false;
+			    }
 </script>
 
 
