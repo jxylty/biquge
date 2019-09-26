@@ -6,7 +6,9 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
 		zzz: true,
-		cent: '11'
+		cent: '11',
+		dian: [],
+		fan: 0
   },
   mutations: {
 		fzzz(state, zzz) {

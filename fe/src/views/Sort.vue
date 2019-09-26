@@ -42,11 +42,20 @@
 				this.$router.push('x1')
 				this.$store.state.zzz=false;
 				this.$store.state.cent= '玄幻小说';
-				console.log(this.$eventBus)
+				if(this.dian2.indexOf('玄幻小说')!=-1){
+					
+				}else{
+					this.dian2.push('玄幻小说');  
+				}
 			},go2(){
 				this.$router.push('x2')
 				this.$store.state.zzz=false;
 				this.$store.state.cent= '仙侠小说';
+				if(this.dian2.indexOf('玄幻小说')!=-1){
+					
+				}else{
+					this.dian2.push('仙侠小说');  
+				}
 			},go3(){
 				this.$router.push('x3')
 				this.$store.state.zzz=false;
@@ -58,6 +67,10 @@
 				this.$router.push('x6')
 			},go7(){
 				this.$router.push('x7')
+			}
+		},computed:{
+			dian2(){
+				return this.$store.state.dian;
 			}
 		}
 	}
