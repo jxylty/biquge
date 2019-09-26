@@ -3,7 +3,7 @@
 	<div>
 	<div class="content">
 		<ul>
-			<li class="prev"><a>玄幻</a></li>
+			<li class="prev" @click="go2"><a>玄幻</a></li>
 			<li class="prev"><a>仙侠</a></li>
 			<li class="prev"><a>都市</a></li>
 		</ul>
