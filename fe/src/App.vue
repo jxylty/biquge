@@ -1,7 +1,7 @@
 <template>
 <div id="app">
 	
-	<div class="head" v-show="falg">
+	<div class="head" v-show="allback">
 		<div class="logo">新笔趣阁</div>
 		
 		<div v-if='isLogin' class="login">
@@ -23,7 +23,7 @@
 		</div>
 		
 	</div>
-	<div class="head2" v-show="!falg">
+	<div class="head2" v-show="!allback">
 
 		<div class="back" @click="goback()">返回</div>
 		<div class="qf">{{ qvs }}</div>
@@ -54,10 +54,8 @@
 				nav: true,
 				hy: true,
 				isLogin:existCookie('token'),
-				
-				falg: true,
 				rout: true,
-				qvs:'',
+				// qvs:this.$store.state.cent,
 				dian:[],
 				fan:0,
 				falg: true,
@@ -90,22 +88,34 @@
 			}
 		},
 		computed:{
-			
+			allback(){
+				return this.$store.state.zzz;
+			},
+			qvs(){
+				return this.$store.state.cent;
+			}
 		},
 		mounted(){
 			this.$eventBus.$on("navShow",(data)=>{
 				this.nav = data
 			})
-			
+			// console.log(this.store.state.cent)
 			
 		},
 		methods:{
 			goRouter(name,ntext){
 			    
-			    this.qvs = ntext;
-			    this.falg=false;
+			    this.$store.state.cent= ntext;
+				this.falg = false;
+			    this.$store.state.zzz= false;
+				// console.log(this.$store.state.zzz)
 				if(!this.rout){
-					this.$router.push('login');
+					this.$router.push({
+						name: 'login',
+						params:{
+							id: 123
+						}
+					});
 					return ;
 				}
 				this.$router.push(name);
@@ -117,14 +127,14 @@
 				  
 			},
 			 gohome(){
-				 this.falg=true;
+				 this.$store.state.zzz=true;
 				this.$router.push('/');
 				this.dian.pop();
 			},
 			goback(){
                 this.$router.back();
                 this.dian.pop();
-                this.qvs = this.dian[this.dian.length-1];
+                this.$store.state.cent = this.dian[this.dian.length-1];
 			    if (this.fan==this.dian.length) {
 			        this.falg=true;
 			        this.dian=[];
@@ -135,12 +145,12 @@
 			login(){
 				this.$router.push('login')
 				this.falg=false;
-				this.qvs="用户登录"
+				this.$store.state.cent="用户登录"
 				this.dian.push("x");
             },regsiter(){
 				this.falg=false;
 				this.$router.push('/regsiter')
-				this.qvs="会员注册"
+				this.$store.state.cent="会员注册"
 				this.dian.push("x");
 				
 			},xiaoShi(){

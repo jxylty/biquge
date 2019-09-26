@@ -3,19 +3,22 @@
 	<div>
 	<div class="content">
 		<ul>
-			<li class="prev"><a>玄幻</a></li>
-			<li class="prev"><a>仙侠</a></li>
-			<li class="prev"><a>都市</a></li>
+			
+			<li class="prev" @click="go1"><a>玄幻</a></li>
+			<li class="prev" @click="go2"><a>仙侠</a></li>
+			<li class="prev"@click="go3"><a>都市</a></li>
 		</ul>
 		<ul>
-			<li class="prev"><a>历史</a></li>
-			<li class="prev"><a>网游</a></li>
-			<li class="prev"><a>科幻</a></li>
+			<li class="prev" @click="go4"><a>历史</a></li>
+			<li class="prev" @click="go5"><a>网游</a></li>
+			<li class="prev" @click="go6"><a>科幻</a></li>
 		</ul>
 		<ul>
-			<li class="prev"><a>其他</a></li>
+			<li class="prev" @click="go7"><a>其他</a></li>
 		</ul>
 	</div>
+	
+		<router-view></router-view>
 	
 
 		<div class="footer">
@@ -33,7 +36,30 @@
 
 <script>
 	export default{
-		name: 'Sort'
+		name: 'Sort',
+		methods:{
+			go1(){
+				this.$router.push('x1')
+				this.$store.state.zzz=false;
+				this.$store.state.cent= '玄幻小说';
+				console.log(this.$eventBus)
+			},go2(){
+				this.$router.push('x2')
+				this.$store.state.zzz=false;
+				this.$store.state.cent= '仙侠小说';
+			},go3(){
+				this.$router.push('x3')
+				this.$store.state.zzz=false;
+			},go4(){
+				this.$router.push('x4')
+			},go5(){
+				this.$router.push('x5')
+			},go6(){
+				this.$router.push('x6')
+			},go7(){
+				this.$router.push('x7')
+			}
+		}
 	}
 </script>
 

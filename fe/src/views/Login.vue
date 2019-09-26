@@ -51,8 +51,12 @@
 			},goRegsiter(){
 				this.$router.push('regsiter')
 			}
+		},
+		mounted(){
+			console.log(this.$route) 
 		}
 	}
+	
 </script>
 
 <style scoped>

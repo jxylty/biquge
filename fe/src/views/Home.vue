@@ -4,7 +4,7 @@
          <div class="tj-top">
              封面推荐
          </div>
-         <div class="tj-bottom">
+         <div class="tj-bottom" @click="goxq">
              <img src="../../public/img/1.jpg" alt="">
              <div class="js">
                  <h2 class="book">三寸人间</h2>
@@ -73,6 +73,15 @@ export default {
   },
   components: {
     
+  },methods:{
+	  goxq(){
+		  this.$router.push({
+		  	name: 'login',
+		  	params:{
+		  		id: 123
+		  	}
+		  })
+	  }
   }
 }
 </script>
