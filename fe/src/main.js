@@ -52,7 +52,8 @@ function existCookie(name) {
         }
         return false;
     }
-
+// store.commit('fzzz');
+// console.log(store.state.zzz);
 
 new Vue({
 

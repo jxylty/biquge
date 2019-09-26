@@ -9,6 +9,14 @@ import Postdate from './views/Postdate.vue'
 import Bookcase from './views/Bookcase.vue'
 import Login from './views/Login.vue'
 import Regsiter from './views/Regsiter.vue'
+import W1001 from './views/W1001.vue'
+import X1 from './components/X1.vue';
+import X2 from './components/X2.vue';
+import X3 from './components/X3.vue';
+import X4 from './components/X4.vue';
+import X5 from './components/X5.vue';
+import X6 from './components/X6.vue';
+import X7 from './components/X7.vue';
 
 Vue.use(Router)
 
@@ -23,7 +31,38 @@ const router = new Router({
     },{
 		path: '/sort',
 		name: 'sort',
-		component: Sort
+		component: Sort,
+		children: [
+			{
+				path: '/x1',
+				name: 'x1',
+				component: X1
+			},{
+				path: '/x2',
+				name: 'x2',
+				component: X2
+			},{
+				path: '/x3',
+				name: 'x3',
+				component: X3
+			},{
+				path: '/x4',
+				name: 'x4',
+				component: X4
+			},{
+				path: '/x5',
+				name: 'x5',
+				component: X5
+			},{
+				path: '/x6',
+				name: 'x6',
+				component: X6
+			},{
+				path: '/x7',
+				name: 'x7',
+				component: X7
+			}
+		]
 	},{
 		path:'/text',
 		name:'/text',
@@ -52,6 +91,10 @@ const router = new Router({
 		path: '/regsiter',
 		name:'regsiter',
 		component: Regsiter
+	},{
+		path: '/w1001',
+		name:'w1001',
+		component: W1001
 	}
 	
 	

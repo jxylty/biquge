@@ -1,7 +1,7 @@
 <template>
 <div id="app">
 	
-	<div class="head" v-show="falg">
+	<div class="head" v-show="allback">
 		<div class="logo">新笔趣阁</div>
 		
 		<div v-if='isLogin' class="login">
@@ -23,7 +23,7 @@
 		</div>
 		
 	</div>
-	<div class="head2" v-show="!falg">
+	<div class="head2" v-show="!allback">
 
 		<div class="back" @click="goback()">返回</div>
 		<div class="qf">{{ qvs }}</div>
@@ -54,12 +54,10 @@
 				nav: true,
 				hy: true,
 				isLogin:existCookie('token'),
-				
-				falg: true,
 				rout: true,
-				qvs:'',
-				dian:[],
-				fan:0,
+				// qvs:this.$store.state.cent,
+				// dian:[],
+				// fan:0,
 				falg: true,
 				navs: [{
 					name: 'sort',
@@ -90,7 +88,28 @@
 			}
 		},
 		computed:{
-			
+			allback(){
+				return this.$store.state.zzz;
+			},
+			qvs(){
+				return this.$store.state.cent;
+			},
+			dian2: {
+				get(){
+					return this.$store.state.dian;
+				},
+				set(val){
+					this.$store.state.dian = val;
+				}
+			},
+			fan2:{
+				get(){
+					return this.$store.state.fan;
+				},
+				set(val){
+					this.$store.state.fan = val;
+				}
+			}
 		},
 		mounted(){
 			this.$eventBus.$on("navShow",(data)=>{
@@ -102,46 +121,55 @@
 		methods:{
 			goRouter(name,ntext){
 			    
-			    this.qvs = ntext;
-			    this.falg=false;
+			    this.$store.state.cent= ntext;
+				this.falg = false;
+			    this.$store.state.zzz= false;
+				// console.log(this.$store.state.zzz)
 				if(!this.rout){
-					this.$router.push('login');
+					this.$router.push({
+						name: 'login',
+						params:{
+							id: 123
+						}
+					});
 					return ;
 				}
 				this.$router.push(name);
-				if(this.dian.indexOf(ntext)!=-1){
+				if(this.dian2.indexOf(ntext)!=-1){
 					
 				}else{
-					this.dian.push(ntext);  
+					this.dian2.push(ntext);  
 				}
 				  
 			},
 			 gohome(){
-				 this.falg=true;
+				 this.$store.state.zzz=true;
 				this.$router.push('/');
-				this.dian.pop();
+				this.dian2.pop();
 			},
 			goback(){
                 this.$router.back();
-                this.dian.pop();
-                this.qvs = this.dian[this.dian.length-1];
-			    if (this.fan==this.dian.length) {
+                this.dian2.pop();
+                this.$store.state.cent = this.dian2[this.dian2.length-1];
+			    if (this.fan2==this.dian2.length) {
 			        this.falg=true;
-			        this.dian=[];
-			        this.fan=0;
+			        this.dian2=[];
+			        this.fan2=0;
 			    }
-				
+				if(this.dian2.length==0){
+					this.$store.state.zzz=true;
+				}
 			},
 			login(){
 				this.$router.push('login')
 				this.falg=false;
-				this.qvs="用户登录"
-				this.dian.push("x");
+				this.$store.state.cent="用户登录"
+				this.dian2.push("x");
             },regsiter(){
 				this.falg=false;
 				this.$router.push('/regsiter')
-				this.qvs="会员注册"
-				this.dian.push("x");
+				this.$store.state.cent="会员注册"
+				this.dian2.push("x");
 				
 			},xiaoShi(){
 				this.friuts='';
@@ -154,7 +182,7 @@
 				this.$router.push('bookcase')
 				
 				// this.qvs="用户登录"
-				this.dian.push("x");
+				this.dian2.push("x");
             }
                 
 
