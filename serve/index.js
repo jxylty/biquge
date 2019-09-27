@@ -14,9 +14,18 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 const codeMap = new Map();
 
-
-app.get('/bqg/books',function(req,res){
-	res.send(bookList.bookList)
+//详情页查询
+app.post('/bqg/books',function(req,res){
+	let bookid = req.body.id;
+	let  books = bookList.bookList;
+	// console.log(books.xuanhuan)
+	// console.log(bookid)
+	// console.log(books.scrj)
+	// console.log(books.name)
+	// let a=1;
+	
+	
+	res.send(books)
 })
 
 //查询我的书架
@@ -25,6 +34,18 @@ app.post('/bqg/bookcase', async function(req,res){
 	let chaxv = await db.getUsers2(user);
 	res.send(chaxv)
 })
+
+//添加书架
+app.post('/bqg/tianjia',async function(req,res){
+	// let user= req.body.name;
+	// let chaxv = await db.getUsers2(user);
+	
+	let ret = await db.createUser2(req.body);
+	
+	
+	res.send(ret)
+})
+
 
 app.post('/bqg/login',async function (req, res) {
 	let md5 = crypto.createHash('md5');

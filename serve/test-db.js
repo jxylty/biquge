@@ -103,6 +103,25 @@ async function getUsers2(user) {
     })
 }
 
+//添加书库
+async function createUser2(user) {
+    const client = await getClient();
+    const testDB = client.db('bqg');
+    return new Promise(function (resolve, reject) {
+        testDB.collection(user.user).insertOne(user, function (err, cmdResult) {
+            if (err) {
+                return reject(err)
+            }
+
+            resolve({
+                ok: true,
+                id: cmdResult.insertedId
+            })
+        });
+    });
+}
+
+//注册添加用户
 async function createUser(user) {
     const client = await getClient();
     const testDB = client.db('bqg');
@@ -278,6 +297,7 @@ module.exports = {
 	getUsers,
 	getUsers2,
     createUser,
+	createUser2,
     existUser,
     getUserByPhone,
     createOrder,

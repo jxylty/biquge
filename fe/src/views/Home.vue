@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-     <div class="tj1">
+     <div class="tj1" @click="goxq('name')">
          <div class="tj-top">
              封面推荐
          </div>
@@ -74,14 +74,14 @@ export default {
   components: {
     
   },methods:{
-	  // goxq(){
-		 //  this.$router.push({
-		 //  	name: 'login',
-		 //  	params:{
-		 //  		id: 123
-		 //  	}
-		 //  })
-	  // }
+	  goxq(id){
+		  this.$router.push({
+		  	name: 'w1001',
+		  	params:{
+		  		id: id
+		  	}
+		  })
+	  }
   }
 }
 </script>
