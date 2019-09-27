@@ -1,10 +1,10 @@
 <template>
   <div class="home">
-     <div class="tj1">
+     <div class="tj1" @click="goxq('name')">
          <div class="tj-top">
              封面推荐
          </div>
-         <div class="tj-bottom" @click="goxq">
+         <div class="tj-bottom" >
              <img src="../../public/img/1.jpg" alt="">
              <div class="js">
                  <h2 class="book">三寸人间</h2>
@@ -74,11 +74,11 @@ export default {
   components: {
     
   },methods:{
-	  goxq(){
+	  goxq(id){
 		  this.$router.push({
-		  	name: 'login',
+		  	name: 'w1001',
 		  	params:{
-		  		id: 123
+		  		id: id
 		  	}
 		  })
 	  }

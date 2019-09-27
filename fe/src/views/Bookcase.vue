@@ -3,13 +3,13 @@
 		 <div class="top1">会员中心-我的书架</div>
 		 <div class="content">
 			 <div class="c1"></div>
-			 <div class="f1">
+			 <div class="f1" v-for="book1 of book1">
 				 <div class="c1Left"> <img v-bind:src="book1.pic"></div>
 				 <div class="c1C">
 					 <div class="uname">{{ book1.name}}</div>
 					<div class="auth"> 作者 : {{ book1.auth}}</div>
-					<div class="zhuangt"> 更新到 : <span>新书</span></div>
-					<div class="jingdu"> 已读到 : 无书签</div>
+					<div class="zhuangt"> 更新到 : <span>{{ book1.new}}</span></div>
+					<div class="jingdu"> 已读到 : {{ book1.old}}</div>
 					<div class="del">删除</div>
 				 </div>
 			 </div>
@@ -18,17 +18,37 @@
 </template>
 
 <script>
+	import axios from 'axios';
 	export default{
 		name: 'bookcase',
 		data(){
 			return {
-				book1:{
+				book1:[{
 					pic: 'http://localhost:3000/2029s.jpg',
 					name: '极品透视',
 					auth: '极品'
 					
-				}
+				}]
 			}
+		},
+		mounted(){
+			let user= '';
+			let parts = document.cookie.split('; ');
+			for (let part of parts) {
+			    if ('user' === part.split('=')[0]) {
+			        
+					user = part.split('=')[1]
+			    }
+			}
+			
+			axios.post('/bqg/bookcase',{
+				name:user
+			}).then((result)=>{
+				console.log(result.data.result)
+				this.book1 = result.data.result;
+			}).catch((err)=>{
+					console.log(err)
+				})
 		}
 	}
 </script>

@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Sort from './views/Sort.vue'
-import Text from './views/Text.vue'
+// import Text from './views/Text.vue'
 import Top from './views/Top.vue'
 import Wapfull from './views/Wapfull.vue'
 import Postdate from './views/Postdate.vue'
@@ -104,7 +104,7 @@ const router = new Router({
 
 
 router.beforeEach( (to, from, next)=>{
-	const navName = ['login','regsiter'];
+	const navName = ['login','regsiter','w1001'];
 	const $eventBus = Vue.prototype.$eventBus;
 	if(navName.indexOf(to.name) !== -1){
 		$eventBus.$emit('navShow',false)

@@ -2,6 +2,7 @@ const express = require('express');
 const fs = require('fs');
 const path = require('path');
 const db = require('./test-db.js');
+const bookList = require('./bookList')
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
@@ -13,42 +14,68 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 const codeMap = new Map();
 
-
-app.get('/bqg/aaa',function(req,res){
-	res.send(req.body)
+//详情页查询
+app.post('/bqg/books',function(req,res){
+	let bookid = req.body.id;
+	let  books = bookList.bookList;
+	// console.log(books.xuanhuan)
+	// console.log(bookid)
+	// console.log(books.scrj)
+	// console.log(books.name)
+	// let a=1;
+	
+	
+	res.send(books)
 })
+
+//查询我的书架
+app.post('/bqg/bookcase', async function(req,res){
+	let user= req.body.name;
+	let chaxv = await db.getUsers2(user);
+	res.send(chaxv)
+})
+
+//添加书架
+app.post('/bqg/tianjia',async function(req,res){
+	// let user= req.body.name;
+	// let chaxv = await db.getUsers2(user);
+	
+	let ret = await db.createUser2(req.body);
+	
+	
+	res.send(ret)
+})
+
 
 app.post('/bqg/login',async function (req, res) {
 	let md5 = crypto.createHash('md5');
 	let password = md5.update(req.body.password).digest('hex');
 	
-	// console.log(req.body);
-	// console.log(password);
 	let chaxv = await db.getUsers(req.body.name);
-	console.log(chaxv);
+	// console.log(chaxv);
 	if(password==chaxv.result[0].password){
 		let token = jwt.sign(req.body.name, 'abc');
-		console.log(token)
+		
+		res.cookie('user', req.body.name);
 		res.cookie('token', token);
 		res.send('1')
 	}else{
 		res.send('0')
 	}
-	// let user =  jwt.verify(req.cookies.token, 'abc');
-	
 })
 app.post('/bqg/user', async function (req, res) {
 	
-    console.log(req.body);
-
-    // console.log(codeMap);
 	let chaxv = await db.getUsers(req.body.name);
-	
+	// console.log(chaxv);
 	if(chaxv.stas==0){
 		let md5 = crypto.createHash('md5');
 		let password = md5.update(req.body.password).digest('hex');
 		req.body.password = password;
+
 		let ret = await db.createUser(req.body);
+
+		let chuanjian = await db.creatColl(req.body.name);
+		console.log('chuanjian', chuanjian)
 		res.send(ret)
 	}else if(chaxv.stas==1){
 		res.send('用户已存在')

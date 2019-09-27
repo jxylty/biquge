@@ -23,6 +23,32 @@ function getClient() {
         });
     });
 }
+
+
+// 创建集合
+
+async function creatColl(uname) {
+	const client = await getClient();
+	const testDB = client.db('bqg');
+	return new Promise( function (resolve, reject){
+		testDB.createCollection(uname, function (err, res) {
+		        if (err) {
+		            return reject(err)
+		        }
+		        
+		        resolve({
+		            ok: true
+		            
+		        })
+		        console.log("创建集合!");
+				
+		        // db.close();
+		    });
+
+	})
+}
+
+//查询用户
 async function getUsers(uname) {
     const client = await getClient();
     const testDB = client.db('bqg');
@@ -49,6 +75,53 @@ async function getUsers(uname) {
     })
 }
 
+
+//查询书库
+async function getUsers2(user) {
+    const client = await getClient();
+    const testDB = client.db('bqg');
+    return new Promise(function (resolve, reject) {
+        testDB.collection(user).find()
+            .toArray(function (err, result) {
+                if (err) {
+                    reject(err);
+                    return;
+                }
+				if(result.length>1){
+					resolve({
+						result:result,
+						stas:1
+					});
+				}else{
+					resolve({
+						result:result,
+						stas:0
+					});
+				}
+                
+            });
+    })
+}
+
+//添加书库
+async function createUser2(user) {
+    const client = await getClient();
+    const testDB = client.db('bqg');
+    return new Promise(function (resolve, reject) {
+        testDB.collection(user.user).insertOne(user, function (err, cmdResult) {
+            if (err) {
+                return reject(err)
+            }
+
+            resolve({
+                ok: true,
+                id: cmdResult.insertedId
+            })
+        });
+    });
+}
+
+//注册添加用户
 async function createUser(user) {
     const client = await getClient();
     const testDB = client.db('bqg');
@@ -216,60 +289,18 @@ async function updateUserAmount(user_id, amount) {
     });
 }
 
-// async function updateStudent(filter, setObj) {
-//     const client = await getClient();
-//     const testDB = client.db('test');
-//     return new Promise(function (resolve, reject) {
-//         testDB.collection('c1909').updateMany(filter, setObj, function (err, cmdResult) {
-//             if (err) {
-//                 return reject(err)
-//             }
-//             resolve({
-//                 ok: true,
-//                 count: cmdResult.modifiedCount
-//             })
-//         })
-//     });
-// }
-//
-// async function removeStudent(filter) {
-//     const client = await getClient();
-//     const testDB = client.db('test');
-//     return new Promise(function (resolve, reject) {
-//         testDB.collection('c1909').remove(filter, function (err, cmdResult) {
-//             if (err) {
-//                 return reject(err)
-//             }
-//             resolve({
-//                 ok: true,
-//                 count: cmdResult.deletedCount
-//             })
-//         });
-//     });
-// }
-// async function insertStudent(student) {
-//     const client = await getClient();
-//     const testDB = client.db('test');
-//     return new Promise(function (resolve, reject) {
-//         testDB.collection('c1909').insertOne(student, function (err, cmdResult) {
-//             if (err) {
-//                 return reject(err)
-//             }
-//
-//             resolve({
-//                 ok: true,
-//                 id: insertedId
-//             })
-//         })
-//     });
-// }
+
+
 
 aa =['assssssssssssssssssssssssssssssssssssswqeeeeeeeeeeeeeeeeeeeeeeeeeeee']
 module.exports = {
 	getUsers,
+	getUsers2,
     createUser,
+	createUser2,
     existUser,
     getUserByPhone,
     createOrder,
-	aa
+	aa,
+	creatColl
 };

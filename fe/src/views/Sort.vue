@@ -54,7 +54,7 @@
 					this.ys7=false;
 				}
 				this.$router.push('x1')
-				this.$store.state.zzz=false;
+				// this.$store.state.zzz=false;
 				this.$store.state.cent= '玄幻小说';
 				if(this.dian2.indexOf('玄幻小说')!=-1){
 					
