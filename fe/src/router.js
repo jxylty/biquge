@@ -99,7 +99,7 @@ const router = new Router({
 
 
 router.beforeEach( (to, from, next)=>{
-	const navName = ['login','regsiter'];
+	const navName = ['login','regsiter','w1001'];
 	const $eventBus = Vue.prototype.$eventBus;
 	if(navName.indexOf(to.name) !== -1){
 		$eventBus.$emit('navShow',false)

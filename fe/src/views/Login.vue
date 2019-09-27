@@ -44,9 +44,14 @@
 				}).then((result)=>{
 					
 					if(result.data==1){
+						this.$store.state.tokenName = uname;
+						// console.log('uname',uname)
+						// console.log(this.$store.state.tokenName)
 						this.$router.push('/')
 					}
-				}).catch(console.error)
+				}).catch((err)=>{
+					console.log(err)
+				})
 				
 			},goRegsiter(){
 				this.$router.push('regsiter')

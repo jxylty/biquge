@@ -4,9 +4,9 @@
 	<div class="head" v-show="allback">
 		<div class="logo">新笔趣阁</div>
 		
-		<div v-if='isLogin' class="login">
+		<div v-if='isLogin2' class="login">
 			<div class="login-left" @click='login2'>
-				会员中心
+				会员中心 
 			</div>
 			<div class="login-right" @click='regsiter2'>
 				退出
@@ -29,7 +29,6 @@
 		<div class="qf">{{ qvs }}</div>
 		<div class="toHome" @click="gohome">首页</div>
 	</div>
-	
 	<div class="nav" v-if="nav">
 			<ul>
 				<li v-for="nav of navs" @click="goRouter(nav.name,nav.ntext)">  {{nav.text}}</li>
@@ -38,7 +37,7 @@
      <div class="search" v-if="nav">
         <input v-model="friuts" @blur="noxiaoShi" @focus="xiaoShi" class="search-in" type="text" value="输入书名后搜索，宁可少字不要错字">
         <input type="button" class="search-on">
-        <img class="search-img" src="../public/img/search.png" alt="">
+        <img @click="test" class="search-img" src="../public/img/search.png" alt="">
     </div> 
     
     <router-view/>
@@ -53,7 +52,7 @@
 				friuts: '输入书名后搜索，宁可少字不要错字',
 				nav: true,
 				hy: true,
-				isLogin:existCookie('token'),
+				isLogin2 : existCookie('token'),
 				rout: true,
 				// qvs:this.$store.state.cent,
 				// dian:[],
@@ -88,11 +87,18 @@
 			}
 		},
 		computed:{
+			isLogin(){
+				return existCookie('token')
+				// this.isLogin2
+			},
 			allback(){
 				return this.$store.state.zzz;
 			},
 			qvs(){
 				return this.$store.state.cent;
+			},
+			tokenName(){
+				return this.$store.state.tokenName;
 			},
 			dian2: {
 				get(){
@@ -116,9 +122,18 @@
 				this.nav = data
 			})
 			
-			
 		},
 		methods:{
+			test(){
+				console.log('tokename',this.$store.state.tokenName)
+				let parts = document.cookie.split('; ');
+				for (let part of parts) {
+				    if ('tom' === part.split('=')[0]) {
+				        console.log(part.split('=')[1])
+				    }
+				}
+				this.isLogin2 = !this.isLogin2;
+			},
 			goRouter(name,ntext){
 			    
 			    this.$store.state.cent= ntext;
@@ -177,7 +192,9 @@
 			},noxiaoShi(){
 				this.friuts='输入书名后搜索，宁可少字不要错字';
 			},regsiter2(){
-				this.$cookieStore.setCookie('token') 
+				this.$cookieStore.setCookie('token');
+				this.$cookieStore.setCookie('user');
+				console.log(this.tokenName)
 			},login2(){
 				this.$router.push('bookcase')
 				

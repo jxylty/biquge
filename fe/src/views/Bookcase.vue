@@ -18,6 +18,7 @@
 </template>
 
 <script>
+	import axios from 'axios';
 	export default{
 		name: 'bookcase',
 		data(){
@@ -29,6 +30,24 @@
 					
 				}
 			}
+		},
+		mounted(){
+			let user= '';
+			let parts = document.cookie.split('; ');
+			for (let part of parts) {
+			    if ('user' === part.split('=')[0]) {
+			        
+					user = part.split('=')[1]
+			    }
+			}
+			
+			axios.post('/bqg/bookcase',{
+				name:user
+			}).then((result)=>{
+				console.log(result.data.result)
+			}).catch((err)=>{
+					console.log(err)
+				})
 		}
 	}
 </script>
