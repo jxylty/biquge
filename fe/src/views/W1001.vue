@@ -107,46 +107,7 @@
         methods: {
             cl(){
                 this.xx=!this.xx;
-            }
-        },
-		mounted(){
-			
-			let parts = document.cookie.split('; ');
-			for (let part of parts) {
-			    if ('user' === part.split('=')[0]) {
-			        
-					this.user = part.split('=')[1]
-			    }
-			}
-			
-			
-			this._id = this.$route.params.id;
-			
-			axios.post('/bqg/books',{
-				id:this._id
-			}).then((result)=>{
-				// console.log(typeof result.data);
-				// console.log(this._id)
-				// console.log(result.data.name)
-				
-				for(var k in result.data){
-					if(k==this._id)
-					this.books = result.data[k]
-				}
-				console.log(this.books)
-				this.book1 = this.books[0];
-				this.zj = this.books[1];
-				
-				// this.book1 = result.data.this._id[0];
-				// this.zj = result.data.this._id[1];
-				this.lbzj = this.zj.slice(0,10)
-				this.newzj = this.zj.slice(this.zj.length-5,this.zj.length).reverse()
-				
-			}).catch((err)=>{
-					console.log(err)
-				})
-		},methods:{
-			next(){
+            },next(){
 				this.zero += 10;
 				this.ten += 10;
 				this.lbzj = this.zj.slice(this.zero,this.ten);
@@ -168,7 +129,41 @@
 			}).catch((err)=>{
 					console.log(err)
 				})
-		}
+			}
+        },
+		mounted(){
+			
+			let parts = document.cookie.split('; ');
+			for (let part of parts) {
+			    if ('user' === part.split('=')[0]) {
+			        
+					this.user = part.split('=')[1]
+			    }
+			}
+			if(!this.$route.params.id){
+				
+			} 
+			
+			this._id = this.$route.params.id;
+			
+			axios.post('/bqg/books',{
+				id:this._id
+			}).then((result)=>{
+				
+				for(var k in result.data){
+					if(k==this._id)
+					this.books = result.data[k]
+				}
+				console.log(this.books)
+				this.book1 = this.books[0];
+				this.zj = this.books[1];
+				
+				this.lbzj = this.zj.slice(0,10)
+				this.newzj = this.zj.slice(this.zj.length-5,this.zj.length).reverse()
+				
+			}).catch((err)=>{
+					console.log(err)
+				})
 		}
 	}
 </script>

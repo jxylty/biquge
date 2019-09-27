@@ -3,7 +3,7 @@
 		 <div class="top1">会员中心-我的书架</div>
 		 <div class="content">
 			 <div class="c1"></div>
-			 <div class="f1" v-for="book1 of book1">
+			 <div class="f1" v-for="book1 of book1" >
 				 <div class="c1Left"> <img v-bind:src="book1.pic"></div>
 				 <div class="c1C">
 					 <div class="uname">{{ book1.name}}</div>
@@ -66,12 +66,14 @@
 		
 	}
 	.f1{
+		height:2.5rem;
 		padding: 0.01rem;
 	}
 
 
 	.c1Left{
-		float: left;margin: 0.32rem .16rem;
+		float: left;margin: 0.26rem .16rem 0rem .16rem;
+		
 	}
 	.c1Left img{
 		width: 1.56rem;height: 1.96rem;

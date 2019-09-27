@@ -1,21 +1,18 @@
 <template>
 	<div>
 	<div class="cover">
-		<p class="line">
-			[玄幻小说]
-			<a class="blue">盖世青帝</a>
-			/山雨苍茫
-		</p>
-		<p class="line">
-			[玄幻小说]
-			<a class="blue">山沟皇帝</a>
-			/雨天下雨
-		</p>
+		<div v-for="book of lbzj">
+			<p class="line">
+				[{{ book.type }}]
+				<a class="blue">{{ book.name }}</a>
+				/{{ book.auth }}
+			</p>
+		</div>
 	</div>
 	
 	<div class="page">
-		<a>下页</a>
-		<a>尾页</a>
+		<a  @click="back2()">上一页</a>
+		<a @click="next()">下一页</a>
 	</div>
 	
 	<div class="page">
@@ -30,8 +27,40 @@
 </template>
 
 <script>
+	import axios from "axios";
+	
 	export default{
-		name: 'X1'
+		name: 'X1',
+		data(){
+			return {
+				books:[],
+				lbzj:[],
+				zero:0,
+				ten: 10
+			}
+		},
+		mounted() {
+			axios.post('/bqg/books',{
+				id:'huanhuan'
+			}).then((result)=>{	
+				this.books = result.data.xuanhuan;
+			this.lbzj = this.books.slice(0,10)
+			
+				
+			}).catch((err)=>{
+					console.log(err)
+				})
+		},methods:{
+			next(){
+				this.zero += 10;
+				this.ten += 10;
+				this.lbzj = this.books.slice(this.zero,this.ten);
+			},back2(){
+				this.zero -= 10;
+				this.ten -= 10;
+				this.lbzj = this.books.slice(this.zero,this.ten);
+			}
+		}
 		}
 </script>
 

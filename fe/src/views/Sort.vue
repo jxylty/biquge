@@ -40,6 +40,11 @@
 			return {
 				ys:false,
 				ys2:false,
+				ys3:false,
+				ys4:false,
+				ys5:false,
+				ys6:false,
+				ys7:false,
 			}
 		},
 		methods:{
