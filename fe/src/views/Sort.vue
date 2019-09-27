@@ -3,7 +3,6 @@
 	<div>
 	<div class="content">
 		<ul>
-			
 			<li class="prev" @click="go1"><a>玄幻</a></li>
 			<li class="prev" @click="go2"><a>仙侠</a></li>
 			<li class="prev"@click="go3"><a>都市</a></li>
@@ -47,6 +46,7 @@
 				}else{
 					this.dian2.push('玄幻小说');  
 				}
+				console.log("")
 			},go2(){
 				this.$router.push('x2')
 				this.$store.state.zzz=false;

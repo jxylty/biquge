@@ -38,7 +38,9 @@
 </template>
 
 <script>
-	
+	export default{
+		name:'top'
+	}
 
 </script>
 

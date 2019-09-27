@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Sort from './views/Sort.vue'
+import Text from './views/Text.vue'
 import Top from './views/Top.vue'
 import Wapfull from './views/Wapfull.vue'
 import Postdate from './views/Postdate.vue'
@@ -62,6 +63,10 @@ const router = new Router({
 				component: X7
 			}
 		]
+	},{
+		path:'/text',
+		name:'/text',
+		component:Text
 	},{
 		path: '/top',
 		name: 'top',
