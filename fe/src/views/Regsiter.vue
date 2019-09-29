@@ -34,6 +34,8 @@
 		},
 		methods:{
 			regsiter(){
+				this.$store.state.zzz=false;
+				
 				let uname = this.$refs.uname.value;
 				let upass = this.$refs.upass.value;
 				let uemall = this.$refs.uemall.value;

@@ -17,8 +17,8 @@
 	
 	<div class="page">
 		输入页数
-		<input id="pageinput" size="4" />
-		<input type="button" value="跳转" onclick="page()" />
+		<input v-model="page" id="pageinput" size="4" />
+		<input @click="search" type="button" value="跳转"  />
 		<br>
 		(第1/10页)当前20条/页
 	</div>
@@ -33,6 +33,7 @@
 		name: 'X1',
 		data(){
 			return {
+				page:'',
 				books:[],
 				lbzj:[],
 				zero:0,
@@ -45,7 +46,7 @@
 			}).then((result)=>{	
 				this.books = result.data.xuanhuan;
 			this.lbzj = this.books.slice(0,10)
-			
+			// console.log(22,this.this.books)
 				
 			}).catch((err)=>{
 					console.log(err)
@@ -59,12 +60,26 @@
 				this.zero -= 10;
 				this.ten -= 10;
 				this.lbzj = this.books.slice(this.zero,this.ten);
+			},
+			search(){
+				let star = this.ten * this.page-10;
+				let end = this.ten * this.page;
+				this.lbzj = this.books.slice(star,end);
+				console.log(star,end)
+				console.log(this.lbzj)
 			}
 		}
 		}
 </script>
 
 <style>
+	
+	
+		
+	
+	#pageinput{
+		border: gray .02rem solid;margin-right: 0.08rem;
+	}
 		.cover {
 		width: 99%;
 		margin:0.2rem auto 0.2rem auto;

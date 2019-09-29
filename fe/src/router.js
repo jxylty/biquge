@@ -17,6 +17,10 @@ import X4 from './components/X4.vue';
 import X5 from './components/X5.vue';
 import X6 from './components/X6.vue';
 import X7 from './components/X7.vue';
+import Y1 from './components/Y1.vue';
+import Y2 from './components/Y2.vue';
+import Y3 from './components/Y3.vue';
+
 
 Vue.use(Router)
 
@@ -70,7 +74,22 @@ const router = new Router({
 	},{
 		path: '/top',
 		name: 'top',
-		component: Top
+		component: Top,
+		children:[
+			{
+				path: '/y1',
+				name: 'y1',
+				component: Y1
+			},{
+				path: '/y2',
+				name: 'y2',
+				component: Y2
+			},{
+				path: '/y3',
+				name: 'y3',
+				component: Y3
+			}
+		]
 	},{
 		path: '/wapfull',
 		name: 'wapfull',

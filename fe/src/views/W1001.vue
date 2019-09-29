@@ -83,18 +83,35 @@
                 </select>
             </div>
             <div class="xz-right" @click="next()">下一页</div>
+			
+			
+			
         </div>
+		
+		
+		
     </div>
 </template>
 
 <script>
    import axios from "axios";
+   import ppp from "../components/ppp.vue";
+   
+  
+   
+   
+   
+   
+   
+   
+   
+   
 	export default{
         name: 'w1001',
         data(){
             return{
 				books: '',
-				_id:'',
+				_id:'1',
                 book1:'',
                  zj: '',
                   newzj:'',
@@ -102,6 +119,7 @@
 				  zero:0,
 				  ten:10,
 				  user: ''
+				  
             }
         },
         methods: {
@@ -132,7 +150,13 @@
 			}
         },
 		mounted(){
-			
+			this.$store.state.zzz=false;
+			this.$store.state.cent = '三寸人间'; 
+			if(this.dian2.indexOf('三寸人间')!=-1){
+				
+			}else{
+				this.dian2.push('三寸人间')
+			}
 			let parts = document.cookie.split('; ');
 			for (let part of parts) {
 			    if ('user' === part.split('=')[0]) {
@@ -140,22 +164,29 @@
 					this.user = part.split('=')[1]
 			    }
 			}
-			if(!this.$route.params.id){
-				
-			} 
 			
 			this._id = this.$route.params.id;
+			// if(this._id=='1'){
+			// 	console.log(111);
+			// }else{
+			// 	console.log(222);
+			// }
+			
+			
+			
 			
 			axios.post('/bqg/books',{
-				id:this._id
+				id:'name'
 			}).then((result)=>{
 				
 				for(var k in result.data){
 					if(k==this._id)
 					this.books = result.data[k]
 				}
-				console.log(this.books)
+				
 				this.book1 = this.books[0];
+				console.log(this.book1)
+				
 				this.zj = this.books[1];
 				
 				this.lbzj = this.zj.slice(0,10)
@@ -164,6 +195,16 @@
 			}).catch((err)=>{
 					console.log(err)
 				})
+				
+				
+		},
+		components:{
+			ppp
+		},
+		computed:{
+			dian2(){
+				return this.$store.state.dian;
+			}
 		}
 	}
 </script>

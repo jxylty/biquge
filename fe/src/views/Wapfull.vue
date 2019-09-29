@@ -1,7 +1,17 @@
 <template>
 	<div>
 	<div class="cover">
-		<p class="line">
+		
+		<div v-for="book of lbzj">
+			<p class="line">
+				[{{ book.type }}]
+				<a class="blue">{{ book.name }}</a>
+				/{{ book.auth }}
+			</p>
+		</div>
+		
+		
+		<!-- <p class="line">
 			[科幻小说]
 			<a class="blue">末日之英雄悲歌</a>
 			/醉言辞
@@ -10,21 +20,22 @@
 			[其他小说]
 			<a class="blue">盛世书香</a>
 			/阿琐
-		</p>
+		</p> -->
 	</div>
 	
 	<div class="page">
-		<a>下页</a>
-		<a>尾页</a>
+		<a  @click="back2()">上一页</a>
+		<a @click="next()">下一页</a>
 	</div>
 	
 	<div class="page">
 		输入页数
-		<input id="pageinput" size="4" />
-		<input type="button" value="跳转" onclick="page()" />
+		<input v-model="page" id="pageinput" size="4" />
+		<input @click="search" type="button" value="跳转"  />
 		<br>
-		(第1/20页)当前20条/页
+		(第1/10页)当前20条/页
 	</div>
+	
 	<div class="footer">
 		<ul>
 			<li><a>首页</a></li>
@@ -38,9 +49,52 @@
 </template>
 
 <script>
+	import axios from "axios";
+	
 	export default{
-		name:'wapfull'
-	}
+		name: 'wapfull',
+		data(){
+			return {
+				page:'',
+				books:[],
+				lbzj:[],
+				zero:0,
+				ten: 10
+			}
+		},
+		mounted() {
+			axios.post('/bqg/books',{
+				id:'huanhuan'
+			}).then((result)=>{	
+				this.books = result.data.xuanhuan;
+			this.lbzj = this.books.slice(0,10)
+			// console.log(22,this.this.books)
+				
+			}).catch((err)=>{
+					console.log(err)
+				})
+		},methods:{
+			next(){
+				this.zero += 10;
+				this.ten += 10;
+				this.lbzj = this.books.slice(this.zero,this.ten);
+			},back2(){
+				this.zero -= 10;
+				this.ten -= 10;
+				this.lbzj = this.books.slice(this.zero,this.ten);
+			},
+			search(){
+				let star = this.ten * this.page-10;
+				let end = this.ten * this.page;
+				this.lbzj = this.books.slice(star,end);
+				console.log(star,end)
+				console.log(this.lbzj)
+			}
+		}
+		}
+	
+	
+	
 </script>
 
 <style>
