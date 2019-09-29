@@ -14,7 +14,7 @@
             </div>
         </div>
         <div class="kj">
-            <div class="ks">开始阅读</div>
+            <div class="ks" @click="goxq('name')">开始阅读</div>
             <div class="jr" @click='tianjia'>加入书架</div>
         </div>
         <div class='headbm'>
@@ -25,7 +25,7 @@
             <div class="inname">{{book1.name}}最新章节&nbsp;&nbsp;&nbsp;更新时间:{{book1.time}}</div>
             <div class="centers-b">
                 <ul>
-                    <li v-for="v of newzj">{{v}} 都别动</li>
+                    <li v-for="v of newzj">{{v}}</li>
                    
                 </ul>
             </div>
@@ -34,7 +34,7 @@
             <div class="list-inname">正文</div>
             <div class="listb">
                 <ul>
-                    <li v-for="v of lbzj">{{v}} 都别动</li>
+                    <li v-for="v of lbzj">{{v}}</li>
                 </ul>
             </div>
         </div>
@@ -104,11 +104,6 @@
 				  user: ''
             }
         },
-        methods: {
-            cl(){
-                this.xx=!this.xx;
-            }
-        },
 		mounted(){
 			
 			let parts = document.cookie.split('; ');
@@ -146,6 +141,17 @@
 					console.log(err)
 				})
 		},methods:{
+            cl(){
+                this.xx=!this.xx;
+            },
+            goxq(id){
+                this.$router.push({
+                    name: 'w1001text',
+                    params:{
+                        id: id
+                    }
+                })
+	        },
 			next(){
 				this.zero += 10;
 				this.ten += 10;
