@@ -83,18 +83,35 @@
                 </select>
             </div>
             <div class="xz-right" @click="next()">下一页</div>
+			
+			
+			
         </div>
+		
+		
+		
     </div>
 </template>
 
 <script>
    import axios from "axios";
+   import ppp from "../components/ppp.vue";
+   
+  
+   
+   
+   
+   
+   
+   
+   
+   
 	export default{
         name: 'w1001',
         data(){
             return{
 				books: '',
-				_id:'',
+				_id:'1',
                 book1:'',
                  zj: '',
                   newzj:'',
@@ -102,57 +119,21 @@
 				  zero:0,
 				  ten:10,
 				  user: ''
+				  
             }
         },
-		mounted(){
-			
-			let parts = document.cookie.split('; ');
-			for (let part of parts) {
-			    if ('user' === part.split('=')[0]) {
-			        
-					this.user = part.split('=')[1]
-			    }
-			}
-			
-			
-			this._id = this.$route.params.id;
-			
-			axios.post('/bqg/books',{
-				id:this._id
-			}).then((result)=>{
-				// console.log(typeof result.data);
-				// console.log(this._id)
-				// console.log(result.data.name)
-				
-				for(var k in result.data){
-					if(k==this._id)
-					this.books = result.data[k]
-				}
-				console.log(this.books)
-				this.book1 = this.books[0];
-				this.zj = this.books[1];
-				
-				// this.book1 = result.data.this._id[0];
-				// this.zj = result.data.this._id[1];
-				this.lbzj = this.zj.slice(0,10)
-				this.newzj = this.zj.slice(this.zj.length-5,this.zj.length).reverse()
-				
-			}).catch((err)=>{
-					console.log(err)
-				})
-		},methods:{
-            cl(){
-                this.xx=!this.xx;
-            },
+        methods: {
             goxq(id){
-                this.$router.push({
-                    name: 'w1001text',
+                 this.$router.push({
+                     name: 'w1001text',
                     params:{
-                        id: id
+                         id: id
                     }
                 })
-	        },
-			next(){
+            },
+            cl(){
+                this.xx=!this.xx;
+            },next(){
 				this.zero += 10;
 				this.ten += 10;
 				this.lbzj = this.zj.slice(this.zero,this.ten);
@@ -174,7 +155,98 @@
 			}).catch((err)=>{
 					console.log(err)
 				})
-		}
+			}
+        },
+// >>>>>>> b80ee308b183eb6ea1c71ac187e40d4ab305a91b
+		mounted(){
+			this.$store.state.zzz=false;
+			this.$store.state.cent = '三寸人间'; 
+			if(this.dian2.indexOf('三寸人间')!=-1){
+				
+			}else{
+				this.dian2.push('三寸人间')
+			}
+			let parts = document.cookie.split('; ');
+			for (let part of parts) {
+			    if ('user' === part.split('=')[0]) {
+			        
+					this.user = part.split('=')[1]
+			    }
+			}
+			
+			this._id = this.$route.params.id;
+			// if(this._id=='1'){
+			// 	console.log(111);
+			// }else{
+			// 	console.log(222);
+			// }
+			
+			
+			
+			
+			axios.post('/bqg/books',{
+				id:'name'
+			}).then((result)=>{
+				
+				for(var k in result.data){
+					if(k==this._id)
+					this.books = result.data[k]
+				}
+				
+				this.book1 = this.books[0];
+				console.log(this.book1)
+				
+				this.zj = this.books[1];
+				
+				this.lbzj = this.zj.slice(0,10)
+				this.newzj = this.zj.slice(this.zj.length-5,this.zj.length).reverse()
+				
+			}).catch((err)=>{
+					console.log(err)
+				})
+// <<<<<<< HEAD
+// 		},methods:{
+//             cl(){
+//                 this.xx=!this.xx;
+//             },
+//             goxq(id){
+//                 this.$router.push({
+//                     name: 'w1001text',
+//                     params:{
+//                         id: id
+//                     }
+//                 })
+// 	        },
+// 			next(){
+// 				this.zero += 10;
+// 				this.ten += 10;
+// 				this.lbzj = this.zj.slice(this.zero,this.ten);
+// 			},back2(){
+// 				this.zero -= 10;
+// 				this.ten -= 10;
+// 				this.lbzj = this.zj.slice(this.zero,this.ten);
+// 			},tianjia(){
+// 			axios.post('/bqg/tianjia',{
+// 				user: this.user,
+// 				name:this.book1.name,
+// 				auth:this.book1.auth,
+// 				pic: this.book1.pic,
+// 				old: '无标签',
+// 				new: this.lbzj[9]
+// 			}).then((result)=>{
+// 				console.log(result.data)
+// =======
+// >>>>>>> b80ee308b183eb6ea1c71ac187e40d4ab305a91b
+				
+				
+		},
+		components:{
+			ppp
+		},
+		computed:{
+			dian2(){
+				return this.$store.state.dian;
+			}
 		}
 	}
 </script>

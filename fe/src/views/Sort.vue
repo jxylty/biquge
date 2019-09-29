@@ -3,17 +3,17 @@
 	<div>
 	<div class="content">
 		<ul>
-			<li class="prev" @click="go1"><a>玄幻</a></li>
-			<li class="prev" @click="go2"><a>仙侠</a></li>
-			<li class="prev"@click="go3"><a>都市</a></li>
+			<li class="prev" @click="go1"><a :class="{done:ys}">玄幻</a></li>
+			<li class="prev" @click="go2"><a :class="{done:ys2}">仙侠</a></li>
+			<li class="prev" @click="go3"><a :class="{done:ys3}">都市</a></li>
 		</ul>
 		<ul>
-			<li class="prev" @click="go4"><a>历史</a></li>
-			<li class="prev" @click="go5"><a>网游</a></li>
-			<li class="prev" @click="go6"><a>科幻</a></li>
+			<li class="prev" @click="go4"><a :class="{done:ys4}">历史</a></li>
+			<li class="prev" @click="go5"><a :class="{done:ys5}">网游</a></li>
+			<li class="prev" @click="go6"><a :class="{done:ys6}">科幻</a></li>
 		</ul>
 		<ul>
-			<li class="prev" @click="go7"><a>其他</a></li>
+			<li class="prev" @click="go7"><a :class="{done:ys7}">其他</a></li>
 		</ul>
 	</div>
 	
@@ -36,10 +36,30 @@
 <script>
 	export default{
 		name: 'Sort',
+		data(){
+			return {
+				ys:false,
+				ys2:false,
+				ys3:false,
+				ys4:false,
+				ys5:false,
+				ys6:false,
+				ys7:false,
+			}
+		},
 		methods:{
 			go1(){
+				this.ys=true
+				if(this.ys==true){
+					this.ys2=false;
+					this.ys3=false;
+					this.ys4=false;
+					this.ys5=false;
+					this.ys6=false;
+					this.ys7=false;
+				}
 				this.$router.push('x1')
-				// this.$store.state.zzz=false;
+				this.$store.state.zzz=false;
 				this.$store.state.cent= '玄幻小说';
 				if(this.dian2.indexOf('玄幻小说')!=-1){
 					
@@ -48,25 +68,113 @@
 				}
 				console.log("")
 			},go2(){
+				this.ys2=true
+				if(this.ys2==true){
+					this.ys=false;
+					this.ys3=false;
+					this.ys4=false;
+					this.ys5=false;
+					this.ys6=false;
+					this.ys7=false;
+				}
 				this.$router.push('x2')
 				this.$store.state.zzz=false;
 				this.$store.state.cent= '仙侠小说';
-				if(this.dian2.indexOf('玄幻小说')!=-1){
+				if(this.dian2.indexOf('仙侠小说')!=-1){
 					
 				}else{
 					this.dian2.push('仙侠小说');  
 				}
 			},go3(){
+				this.ys3=true
+				if(this.ys3==true){
+					this.ys1=false;
+					this.ys2=false;
+					this.ys4=false;
+					this.ys5=false;
+					this.ys6=false;
+					this.ys7=false;
+				}
 				this.$router.push('x3')
 				this.$store.state.zzz=false;
+				this.$store.state.cent = '都市小说';
+				if(this.dian2.indexOf('都市小说')!=-1){
+					
+				}else{
+					this.dian2.push('都市小说')
+				}
 			},go4(){
+				this.ys4=true
+				if(this.ys4==true){
+					this.ys=false;
+					this.ys3=false;
+					this.ys2=false;
+					this.ys5=false;
+					this.ys6=false;
+					this.ys7=false;
+				}
 				this.$router.push('x4')
+				this.$store.state.zzz=false;
+				this.$store.state.cent = '历史小说';
+				if(this.dian2.indexOf('历史小说')!=-1){
+					
+				}else{
+					this.dian2.push('历史小说')
+				}
 			},go5(){
+				this.ys5=true
+				if(this.ys5==true){
+					this.ys=false;
+					this.ys3=false;
+					this.ys4=false;
+					this.ys2=false;
+					this.ys6=false;
+					this.ys7=false;
+				}
 				this.$router.push('x5')
+				this.$store.state.zzz=false;
+				this.$store.state.cent = '网游小说';
+				if(this.dian2.indexOf('网游小说')!=-1){
+					
+				}else{
+					this.dian2.push('网游小说')
+				}
 			},go6(){
+				this.ys6=true
+				if(this.ys6==true){
+					this.ys=false;
+					this.ys3=false;
+					this.ys4=false;
+					this.ys5=false;
+					this.ys2=false;
+					this.ys7=false;
+				}
 				this.$router.push('x6')
+				this.$store.state.zzz=false;
+				this.$store.state.cent = '科幻小说';
+				if(this.dian2.indexOf('科幻小说')!=-1){
+					
+				}else{
+					this.dian2.push('科幻小说')
+				}
 			},go7(){
+				this.ys7=true
+				if(this.ys7==true){
+					this.ys=false;
+					this.ys3=false;
+					this.ys4=false;
+					this.ys5=false;
+					this.ys6=false;
+					this.ys2=false;
+				}
 				this.$router.push('x7')
+				this.$store.state.zzz=false;
+				this.$store.state.cent = '其他小说';
+				if(this.dian2.indexOf('其他小说')!=-1){
+					
+				}else{
+					this.dian2.push('其他小说')
+				}
 			}
 		},computed:{
 			dian2(){
@@ -77,6 +185,9 @@
 </script>
 
 <style>
+	 .content .done{
+		background:rgb(204,204,204);
+	}
 	.content {
 		width:98%;
 		margin-top: 0.2rem;

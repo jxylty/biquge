@@ -58,7 +58,8 @@
 			}
 		},
 		mounted(){
-			console.log(this.$route) 
+			this.$store.state.zzz=false;
+			// console.log(this.$route) 
 		}
 	}
 	

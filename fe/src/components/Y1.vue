@@ -3,7 +3,7 @@
 	<div class="cover">
 		<div v-for="book of lbzj">
 			<p class="line">
-				[都市小说]
+				[{{ book.type }}]
 				<a class="blue">{{ book.name }}</a>
 				/{{ book.auth }}
 			</p>
@@ -30,7 +30,7 @@
 	import axios from "axios";
 	
 	export default{
-		name: 'X3',
+		name: 'y1',
 		data(){
 			return {
 				page:'',
@@ -45,7 +45,7 @@
 				id:'huanhuan'
 			}).then((result)=>{	
 				this.books = result.data.xuanhuan;
-			this.lbzj = this.books.slice(0,10)
+			this.lbzj = this.books.slice(10,20)
 			// console.log(22,this.this.books)
 				
 			}).catch((err)=>{
@@ -136,3 +136,4 @@
 	
 	
 </style>
+
